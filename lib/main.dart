@@ -6,9 +6,8 @@ import 'screens/registered.dart';
 import 'screens/home.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 
-
 void main() {
-  KakaoSdk.init(nativeAppKey: 'YOUR_NATIVE_APP_KEY');
+  KakaoSdk.init(nativeAppKey: '2jmj7l5rSw0yVb/vlWAYkK/YBwk=');
   runApp(MyApp());
 }
 

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
+
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -45,20 +47,21 @@ class _LoginScreenState extends State<LoginScreen> {
         flexibleSpace: Padding(
           padding: const EdgeInsets.only(top: 82, left: 125),
           child: SizedBox(
-            width: 140,
-            height: 30,
-            child: Text(
-              '혼자여도 함께인 식탁',
-              style: TextStyle(
-                fontWeight: FontWeight.w400,
-                fontSize: 16,
-                height: 29.7 / 16,
-                color: Color(0xFF232323),
+            child: Center(
+              child: Text(
+                '혼자여도 함께인 식탁',
+                style: TextStyle(
+                  fontWeight: FontWeight.w400,
+                  fontSize: 16,
+                  height: 29.7 / 16,
+                  color: Color(0xFF232323),
+                ),
               ),
             ),
           ),
         ),
       ),
+
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 22),
         child: SingleChildScrollView(
@@ -164,7 +167,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       '아이디 찾기',
                       style: TextStyle(
                         fontWeight: FontWeight.w400,
-                        fontSize: 10,
+                        fontSize: 15,
                         height: 29.7 / 10,
                         color: Color(0xFF232323),
                       ),
@@ -179,7 +182,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       '비밀번호 찾기',
                       style: TextStyle(
                         fontWeight: FontWeight.w400,
-                        fontSize: 10,
+                        fontSize: 15,
                         height: 29.7 / 10,
                         color: Color(0xFF232323),
                       ),
@@ -191,7 +194,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Center(
                 child: Container(
                   width: 346,
-                  height: 53,
+                  height: 60,
                   decoration: BoxDecoration(
                     color: Color(0xFFD9E2FB),
                     borderRadius: BorderRadius.circular(8),
@@ -225,7 +228,22 @@ class _LoginScreenState extends State<LoginScreen> {
               Center(
                 child: GestureDetector(
                   onTap: () {
-                    // 카카오 로그인
+                    void kakaoLogin() async {
+                      try {
+                        bool isInstalled = await isKakaoTalkInstalled();
+                        if (isInstalled) {
+                          await UserApi.instance.loginWithKakaoTalk();
+                        } else {
+                          await UserApi.instance.loginWithKakaoAccount();
+                        }
+
+                        final user = await UserApi.instance.me();
+                        print('카카오 로그인 성공: ${user.kakaoAccount?.email}');
+                      } catch (e) {
+                        print('카카오 로그인 실패: $e');
+                      }
+                    }
+
                   },
                   child: Container(
                     width: 350,
