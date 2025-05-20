@@ -227,24 +227,22 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(height: 100),
               Center(
                 child: GestureDetector(
-                  onTap: () {
-                    void kakaoLogin() async {
-                      try {
-                        bool isInstalled = await isKakaoTalkInstalled();
-                        if (isInstalled) {
-                          await UserApi.instance.loginWithKakaoTalk();
-                        } else {
-                          await UserApi.instance.loginWithKakaoAccount();
-                        }
-
-                        final user = await UserApi.instance.me();
-                        print('카카오 로그인 성공: ${user.kakaoAccount?.email}');
-                      } catch (e) {
-                        print('카카오 로그인 실패: $e');
+                  onTap: () async {
+                    try {
+                      bool isInstalled = await isKakaoTalkInstalled();
+                      if (isInstalled) {
+                        await UserApi.instance.loginWithKakaoTalk();
+                      } else {
+                        await UserApi.instance.loginWithKakaoAccount();
                       }
-                    }
 
+                      final user = await UserApi.instance.me();
+                      print('카카오 로그인 성공: ${user.kakaoAccount?.email}');
+                    } catch (e) {
+                      print('카카오 로그인 실패: $e');
+                    }
                   },
+
                   child: Container(
                     width: 350,
                     height: 60,
