@@ -7,7 +7,7 @@ import 'screens/home.dart';
 import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
 
 void main() {
-  KakaoSdk.init(nativeAppKey: '2jmj7l5rSw0yVb/vlWAYkK/YBwk=');
+  KakaoSdk.init(nativeAppKey: '5ba08a3f7dfc40d9faf0daa0b9053d5a');
   runApp(MyApp());
 }
 
@@ -20,12 +20,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      initialRoute: '/login',
+      initialRoute: '/',
       routes: {
-        // '/': (context) => OnboardingScreen(),
+        '/': (context) => OnboardingScreen(),
         '/login': (context) => LoginScreen(),
-        // '/register': (context) => RegisterScreen(),
-        // '/registered': (context) => RegisteredScreen(),
+        '/register': (context) => SignupStartScreen(),
+        '/registered': (context) => RegisteredScreen(),
         // '/home': (context) => HomeScreen(),
       },
     );
